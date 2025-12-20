@@ -1,5 +1,5 @@
 import { blackColor, mainColor, whiteColor } from '@/consts/colors/colors';
-import { initDB } from '@/db/actions/meals/database';
+import { initDB } from '@/db/database';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 import { useEffect } from 'react';

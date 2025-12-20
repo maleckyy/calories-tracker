@@ -1,5 +1,5 @@
 import { Meal } from "@/types/meal.type";
-import { db } from "./database";
+import { db } from "../../database";
 
 export const updateMeal = (updatedMeal: Meal): Meal | null => {
     try {

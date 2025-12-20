@@ -1,6 +1,6 @@
 import { Meal, MealCreate } from "@/types/meal.type";
 import { getId } from "@/utils/getId";
-import { db } from "./database";
+import { db } from "../../database";
 
 export const addMeal = (meal: MealCreate): Meal => {
     const id = getId();
