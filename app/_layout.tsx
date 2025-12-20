@@ -2,7 +2,7 @@ import AppLoading from "@/components/shared/AppLoading";
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import { useEffect } from "react";
-import { initDB } from "../db/database";
+import { initDB } from "../db/actions/meals/database";
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     'Onest-100': require('../assets/fonts/Onest-Thin.ttf'),

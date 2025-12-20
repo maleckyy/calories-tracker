@@ -3,7 +3,7 @@ import CaloriesAmount from '@/components/dashboard-components/CaloriesAmount';
 import LastMeals from '@/components/dashboard-components/LastMeals';
 import AppContainer from '@/components/shared/AppContainer';
 import AppSafeView from '@/components/shared/AppSafeView';
-import { getAllMeals } from '@/db/actions/getMeals';
+import { getAllMeals } from '@/db/actions/meals/getMeals';
 import { useMealStore } from '@/stores/meals/useMealsStore';
 import { getTodayMeals } from '@/utils/meals/getTodayMeals';
 import { useCallback, useEffect, useMemo } from 'react';

@@ -1,4 +1,4 @@
-import { deleteMeal } from '@/db/actions/deleteMealById'
+import { deleteMeal } from '@/db/actions/meals/deleteMealById'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { Meal } from '@/types/meal.type'
 import React, { useCallback } from 'react'
