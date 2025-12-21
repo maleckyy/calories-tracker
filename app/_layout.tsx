@@ -24,6 +24,13 @@ export default function RootLayout() {
           headerShown: false
         }}
       />
+      <Stack.Screen
+        name="edit-user-data"
+        options={{
+          presentation: 'modal',
+          headerShown: false
+        }}
+      />
     </Stack>
   )
 }

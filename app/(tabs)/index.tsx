@@ -4,13 +4,16 @@ import LastMeals from '@/components/dashboard-components/LastMeals';
 import AppContainer from '@/components/shared/AppContainer';
 import AppSafeView from '@/components/shared/AppSafeView';
 import { getAllMeals } from '@/db/actions/meals/getMeals';
+import { getUserData } from '@/db/actions/user/getUserData';
 import { useMealStore } from '@/stores/meals/useMealsStore';
+import { useUserStore } from '@/stores/user/useUserStore';
 import { getTodayMeals } from '@/utils/meals/getTodayMeals';
 import { useCallback, useEffect, useMemo } from 'react';
 
 export default function Index() {
   const { setMeals } = useMealStore()
   const meals = useMealStore(state => state.meals)
+  const { setUser } = useUserStore()
 
   const fetchMeals = useCallback(() => {
     const rows = getAllMeals()
@@ -34,6 +37,11 @@ export default function Index() {
   useEffect(() => {
     fetchMeals();
   }, [fetchMeals]);
+
+  useEffect(() => {
+    const user = getUserData()
+    if (user) setUser(user)
+  }, [setUser])
 
   return (
     <AppSafeView>

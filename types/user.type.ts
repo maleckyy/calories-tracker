@@ -1,3 +1,7 @@
+export type GenderType = 'male' | 'female' | 'other'
+
+export type GoalType = 'loseWeight' | 'maintain' | 'gainMuscle'
+
 export type User = {
     username: string
     birthDate: string
@@ -9,8 +13,8 @@ export type User = {
 
     waterGoal: number
 
-    gender: 'male' | 'female' | 'other'
+    gender: GenderType
     weight: number
     height: number
-    goal: 'loseWeight' | 'maintain' | 'gainMuscle'
+    goal: GoalType
 }
