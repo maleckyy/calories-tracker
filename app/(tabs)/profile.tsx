@@ -3,10 +3,9 @@ import UserGoals from '@/components/profile/UserGoals';
 import UserRequirements from '@/components/profile/UserRequirements';
 import AppContainer from '@/components/shared/AppContainer';
 import AppSafeView from '@/components/shared/AppSafeView';
-import SectionTitle from '@/components/shared/text/SectionTitle';
+import ScreenHeader from '@/components/shared/ScreenHeader';
 import { useUserStore } from '@/stores/user/useUserStore';
 import { useRouter } from 'expo-router';
-import { StyleSheet } from 'react-native';
 
 export default function ProfileScreen() {
     const { user } = useUserStore()
@@ -19,7 +18,7 @@ export default function ProfileScreen() {
     return (
         <AppSafeView>
             <AppContainer>
-                <SectionTitle style={styles.sectionTitle}>Your Profile</SectionTitle>
+                <ScreenHeader title='Your Profile' />
                 {user && (
                     <>
                         <ProfileInformation user={user} redirect={redirectToEditPage} />
@@ -31,7 +30,3 @@ export default function ProfileScreen() {
         </AppSafeView>
     );
 }
-
-const styles = StyleSheet.create({
-    sectionTitle: { color: '#000', fontSize: 14 },
-});

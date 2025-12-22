@@ -43,11 +43,11 @@ function SingleMealItem({ meal, deleteFn }: PropsType) {
         <View style={styles.container}>
             <View style={styles.containerName}>
                 <View style={styles.containerData}>
-                    <AppText style={styles.mealNameText}>
+                    <AppText variant='medium'>
                         {meal.name}
                     </AppText>
                     <AppText>|</AppText>
-                    <AppText style={styles.mealNameText}>
+                    <AppText variant='medium'>
                         {meal.kcal} Kcal
                     </AppText>
                 </View>
@@ -56,13 +56,13 @@ function SingleMealItem({ meal, deleteFn }: PropsType) {
                 </TouchableOpacity>
             </View>
             <View style={styles.containerDetails}>
-                <AppText style={styles.mealNameText}>
+                <AppText>
                     Protein {meal.protein}g
                 </AppText>
-                <AppText style={styles.mealNameText}>
+                <AppText>
                     Carbs {meal.carbs}g
                 </AppText>
-                <AppText style={styles.mealNameText}>
+                <AppText>
                     Fat {meal.fat}g
                 </AppText>
             </View>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: whiteColor,
         flexDirection: 'column',
-        gap: 8,
+        gap: 6,
         marginBlock: 6,
         borderRadius: 10,
         paddingBlock: 8,
@@ -100,7 +100,4 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         gap: 16
     },
-    mealNameText: {
-        fontSize: 16
-    }
 })

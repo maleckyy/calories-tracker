@@ -6,6 +6,7 @@ import { initDB } from "../db/database";
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     'Onest-100': require('../assets/fonts/Onest-Thin.ttf'),
+    'Onest-400': require('../assets/fonts/Onest-Medium.ttf'),
     'Onest-900': require('../assets/fonts/Onest-Bold.ttf'),
   })
 

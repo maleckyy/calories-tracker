@@ -11,7 +11,7 @@ export function LegendItem({ color, label }: LegendItemProps) {
     return (
         <View style={styles.container}>
             <View style={[styles.dot, { backgroundColor: color }]} />
-            <AppText style={styles.text}>{label}</AppText>
+            <AppText bold>{label}</AppText>
         </View>
     )
 }
@@ -27,8 +27,5 @@ const styles = StyleSheet.create({
         height: 10,
         borderRadius: 5,
         marginRight: 6,
-    },
-    text: {
-        fontSize: 14,
     },
 })

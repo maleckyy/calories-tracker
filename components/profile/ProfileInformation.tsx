@@ -13,25 +13,27 @@ type PropsType = {
 
 function ProfileInformation({ user, redirect }: PropsType) {
     return (
-        <View style={styles.containerMain}>
-            <AppCard >
+        <AppCard>
+            <View style={styles.containerMain}>
                 <View style={styles.containerUserWrapper}>
                     <View style={styles.containerUser}>
-                        <AppText style={styles.username}>{user.username}</AppText>
-                        <AppText style={styles.dateOfBirth}>Date of birth: {user.birthDate}</AppText>
-                        <AppText style={styles.gender}>Gender: {getGenderName(user.gender)}</AppText>
+                        <AppText variant='xlarge'>{user.username}</AppText>
+                        <AppText >Date of birth: {user.birthDate}</AppText>
+                        <AppText >Gender: {getGenderName(user.gender)}</AppText>
                     </View>
                     <TouchableOpacity style={{ paddingBlock: 4 }} onPress={redirect}>
                         <Ionicons name="settings" size={24}></Ionicons>
                     </TouchableOpacity>
                 </View>
-                <AppText style={styles.conditionTitle}>Physical condition of the user</AppText>
-                <View style={styles.containerDetails}>
-                    <AppText>{user.weight} kg</AppText>
-                    <AppText>{user.height} cm</AppText>
+                <View style={styles.containerDetailsWrapper}>
+                    <AppText variant='medium'>Physical condition of the user</AppText>
+                    <View style={styles.containerDetails}>
+                        <AppText>{user.weight} kg</AppText>
+                        <AppText>{user.height} cm</AppText>
+                    </View>
                 </View>
-            </AppCard>
-        </View>
+            </View>
+        </AppCard>
     )
 }
 
@@ -40,7 +42,7 @@ export default memo(ProfileInformation)
 const styles = StyleSheet.create({
     containerMain: {
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         width: '100%',
         gap: 8
@@ -55,10 +57,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         gap: 4,
     },
-    username: { color: '#000', fontSize: 32 },
-    dateOfBirth: { fontSize: 15 },
-    gender: { fontSize: 15 },
-    conditionTitle: { fontSize: 18, marginTop: 8, marginBottom: 4 },
+    containerDetailsWrapper: {
+        flexDirection: 'column',
+        gap: 4
+    },
     containerDetails: {
         flexDirection: 'row',
         alignItems: 'center',
