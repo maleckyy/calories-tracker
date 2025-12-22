@@ -1,10 +1,10 @@
+import { gapBetweenSection } from '@/consts/spacing/gaps'
 import { deleteMeal } from '@/db/actions/meals/deleteMealById'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { Meal } from '@/types/meal.type'
 import React, { useCallback } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { AppText } from '../shared/text/AppText'
-import SectionTitle from '../shared/text/SectionTitle'
 import SingleMealItem from './SingleMealItem'
 
 export default function LastMeals({ meals }: { meals: Meal[] }) {
@@ -19,20 +19,16 @@ export default function LastMeals({ meals }: { meals: Meal[] }) {
 
     return (
         <View style={styles.container}>
-            <SectionTitle>{`Today's meals`}</SectionTitle>
+            <AppText variant='large'>{`Today's meals`}</AppText>
             {meals.length > 0 && meals.map(m => <SingleMealItem meal={m} key={m.id} deleteFn={deleteMealById} />)}
-            {meals.length === 0 && <AppText style={styles.text}>No meals today ;(</AppText>}
+            {meals.length === 0 && <AppText>No meals today ;(</AppText>}
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%'
+        width: '100%',
+        gap: gapBetweenSection
     },
-    text: {
-        fontSize: 14,
-        textAlign: 'center',
-        paddingBlock: 8
-    }
 })

@@ -1,4 +1,5 @@
 import { blackColor, dangerColor, grayBackground } from '@/consts/colors/colors';
+import { gapBetweenSection } from '@/consts/spacing/gaps';
 import { Meal, MealCreate } from '@/types/meal.type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
@@ -131,7 +132,7 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
                 </View>
             </View>
 
-            <View style={{ marginTop: 20 }}>
+            <View style={{ marginTop: gapBetweenSection }}>
                 <BaseButton
                     title={isEditing ? "Save changes" : "Add"}
                     onPress={handleSubmit(handleFormSubmit)}
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     field: {
-        marginBottom: 15,
+        marginBottom: gapBetweenSection,
     },
     label: {
         fontSize: 14,

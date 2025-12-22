@@ -24,7 +24,7 @@ export default function EditUserDataScreen() {
     return (
         <AppSafeView>
             <AppContainer>
-                <ScreenHeader title='Edit User' backHref={'/(tabs)/profile'} />
+                <ScreenHeader title='Edit Profile' backHref={'/(tabs)/profile'} />
                 {user && <ProfileForm initialData={user} onSubmit={updateUserDataFn} />}
             </AppContainer>
         </AppSafeView>

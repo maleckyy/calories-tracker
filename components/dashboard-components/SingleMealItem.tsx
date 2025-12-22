@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
         backgroundColor: whiteColor,
         flexDirection: 'column',
         gap: 6,
-        marginBlock: 6,
         borderRadius: 10,
         paddingBlock: 8,
         paddingInline: 12

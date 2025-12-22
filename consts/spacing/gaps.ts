@@ -1,0 +1,1 @@
+export const gapBetweenSection = 8

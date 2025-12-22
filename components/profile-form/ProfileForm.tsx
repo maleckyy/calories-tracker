@@ -1,4 +1,5 @@
 import { blackColor, dangerColor, grayBackground } from '@/consts/colors/colors';
+import { gapBetweenSection } from '@/consts/spacing/gaps';
 import { GenderType, GoalType, User } from '@/types/user.type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -9,22 +10,16 @@ import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } fr
 import * as z from 'zod';
 import BaseButton from '../shared/buttons/BaseButton';
 
-
 const profileSchema = z.object({
     username: z.string().min(3),
     birthDate: z.date(),
-
     calorieRequirement: z.string().min(1),
     proteinRequirement: z.string().min(1),
     carbsRequirement: z.string().min(1),
     fatRequirement: z.string().min(1),
-
     waterGoal: z.string().min(1),
-
-
     weight: z.string().min(1),
     height: z.string().min(1),
-
     gender: z.string().min(1),
     goal: z.string().min(1),
 });
@@ -35,6 +30,7 @@ type PropsType = {
     initialData: User;
     onSubmit: (data: User) => void;
 }
+
 export default function ProfileForm({ initialData: user, onSubmit }: PropsType) {
     const [showDatePicker, setShowDatePicker] = React.useState(false);
     const { control, handleSubmit, formState: { errors, isValid } } = useForm<ProfileFormValues>({
@@ -259,7 +255,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                 </View>
             </View>
 
-            <View style={{ marginTop: 30 }}>
+            <View style={{ marginTop: gapBetweenSection }}>
                 <BaseButton
                     title="Save Profile"
                     onPress={handleSubmit(handleFormSubmit)}
@@ -273,7 +269,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%'
+        width: '100%',
     },
     title: {
         fontSize: 24,
@@ -281,7 +277,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     field: {
-        marginBottom: 15,
+        marginBottom: gapBetweenSection,
     },
     label: {
         fontSize: 14,
@@ -307,7 +303,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         gap: 10,
-        marginBottom: 15,
     },
     macroCol: {
         flex: 1,
