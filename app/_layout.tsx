@@ -6,6 +6,7 @@ import { initDB } from "../db/database";
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     'Onest-100': require('../assets/fonts/Onest-Thin.ttf'),
+    'Onest-400': require('../assets/fonts/Onest-Medium.ttf'),
     'Onest-900': require('../assets/fonts/Onest-Bold.ttf'),
   })
 
@@ -19,6 +20,13 @@ export default function RootLayout() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="edit-meal"
+        options={{
+          presentation: 'modal',
+          headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="edit-user-data"
         options={{
           presentation: 'modal',
           headerShown: false

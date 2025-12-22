@@ -70,7 +70,7 @@ function MacrosChart({ meals }: { meals: Meal[] }) {
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 12,
-                gap: 16
+                gap: 8
             }}>
                 <LegendItem color={macrosColors.protein} label={"Protein | " + totals.protein + "g"} />
                 <LegendItem color={macrosColors.carbs} label={"Carbs | " + totals.carbs + "g"} />
