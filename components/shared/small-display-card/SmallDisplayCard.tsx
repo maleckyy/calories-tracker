@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
         flexGrow: 1,
     },
     iconWrapper: {
-        // width: 28,
         alignItems: 'center'
     },
     dot: {
