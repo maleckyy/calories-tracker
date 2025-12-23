@@ -1,4 +1,4 @@
-import { whiteColor } from '@/consts/colors/colors'
+import { grayMutedBackground } from '@/consts/colors/colors'
 import { Meal } from '@/types/meal.type'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
@@ -15,7 +15,7 @@ function SingleMealItem({ meal, deleteFn }: PropsType) {
     const router = useRouter()
 
     function handleEdit(item: Meal) {
-        router.replace(`/edit-meal?id=${meal.id}`)
+        router.replace(`/edit-meal?id=${item.id}`)
     }
 
     function handleDelete(id: string) {
@@ -75,7 +75,7 @@ export default memo(SingleMealItem)
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: whiteColor,
+        backgroundColor: grayMutedBackground,
         flexDirection: 'column',
         gap: 6,
         borderRadius: 10,

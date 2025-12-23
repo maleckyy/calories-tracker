@@ -1,4 +1,5 @@
 import { Meal } from '@/types/meal.type';
+import { formatDate } from '@/utils/formatDate/formatDate';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import React, { memo } from 'react';
@@ -59,11 +60,7 @@ function MealElement({ meal, deleteFn }: PropsType) {
                 </AppText>
             </View>
             <View style={styles.container}>
-                <AppText variant='base'>{new Date(meal.date).toLocaleDateString('pl-PL', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                })}</AppText>
+                <AppText variant='base'>{formatDate(meal.date)}</AppText>
             </View>
         </AppCard>
     )
