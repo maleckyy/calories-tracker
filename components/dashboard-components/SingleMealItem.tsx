@@ -1,5 +1,6 @@
 import { grayMutedBackground } from '@/consts/colors/colors'
 import { Meal } from '@/types/meal.type'
+import { formatDate } from '@/utils/formatDate/formatDate'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
 import React, { memo } from 'react'
@@ -9,9 +10,10 @@ import { AppText } from '../shared/text/AppText'
 type PropsType = {
     meal: Meal
     deleteFn: (id: string) => void
+    showDate?: boolean
 }
 
-function SingleMealItem({ meal, deleteFn }: PropsType) {
+function SingleMealItem({ meal, deleteFn, showDate = false }: PropsType) {
     const router = useRouter()
 
     function handleEdit(item: Meal) {
@@ -66,6 +68,9 @@ function SingleMealItem({ meal, deleteFn }: PropsType) {
                     Fat {meal.fat}g
                 </AppText>
             </View>
+            {showDate && <View style={styles.containerDate}>
+                <AppText variant='base'>{formatDate(meal.date)}</AppText>
+            </View>}
         </View>
     )
 }
@@ -98,5 +103,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         gap: 16
+    },
+    containerDate: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
 })

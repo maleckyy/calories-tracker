@@ -5,8 +5,9 @@ import { Meal, MealGroup } from '@/types/meal.type';
 import { formatDate } from '@/utils/formatDate/formatDate';
 import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
+import SingleMealItem from '../dashboard-components/SingleMealItem';
+import { AppCard } from '../shared/AppCard';
 import { AppText } from '../shared/text/AppText';
-import MealElement from './MealElement';
 
 export default function MealsList() {
     const meals = useMealStore(state => state.meals)
@@ -32,8 +33,6 @@ export default function MealsList() {
             .sort((a, b) => new Date(b.day).getTime() - new Date(a.day).getTime());
     }, [sortedMeals]);
 
-    console.log(groupedMeals)
-
     const deleteMealById = useCallback((id: string) => {
         const res = deleteMeal(id)
         if (res === true) {
@@ -45,10 +44,10 @@ export default function MealsList() {
         <View style={styles.container}>
             {groupedMeals && groupedMeals.map(g => {
                 return (
-                    <View key={g.day} style={styles.container}>
-                        <AppText style={{ paddingInline: gapBetweenSection }} variant='medium'>{formatDate(g.day)}</AppText>
-                        {g && g.meals.map(m => <MealElement meal={m} key={m.id} deleteFn={deleteMealById} />)}
-                    </View>
+                    <AppCard key={g.day} style={styles.container}>
+                        <AppText variant='large'>{formatDate(g.day)}</AppText>
+                        {g && g.meals.map(m => <SingleMealItem meal={m} key={m.id} deleteFn={deleteMealById} showDate />)}
+                    </AppCard>
                 )
             })}
         </View>
