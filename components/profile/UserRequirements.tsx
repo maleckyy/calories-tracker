@@ -1,4 +1,5 @@
 import { macrosColors } from '@/consts/colors/colors';
+import { gapBetweenSection } from '@/consts/spacing/gaps';
 import { User } from '@/types/user.type';
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -8,8 +9,8 @@ import { AppText } from '../shared/text/AppText';
 
 function UserRequirements({ user }: { user: User }) {
     return (
-        <AppCard style={{ gap: 8 }}>
-            <View style={{ gap: 8 }}>
+        <AppCard style={{ gap: gapBetweenSection }}>
+            <View style={{ gap: gapBetweenSection }}>
                 <AppText variant='large'>Your requirements</AppText>
                 <View style={styles.container}>
                     <SmallDisplayCard
@@ -19,13 +20,13 @@ function UserRequirements({ user }: { user: User }) {
                     />
                     <SmallDisplayCard
                         title='Protein'
-                        textValue={`${user.waterGoal} g`}
+                        textValue={`${user.proteinRequirement} g`}
                         dotColor={macrosColors.protein}
                     />
                 </View>
                 <View style={styles.container}>
                     <SmallDisplayCard
-                        title='Protein'
+                        title='Carbs'
                         textValue={`${user.carbsRequirement} g`}
                         dotColor={macrosColors.carbs}
                     />

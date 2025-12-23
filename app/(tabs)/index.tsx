@@ -2,6 +2,7 @@ import { HydrationLevel } from '@/components/charts/hydration/HydrationLevel';
 import MacrosChart from '@/components/charts/macros-chart/MacrosChart';
 import CaloriesAmount from '@/components/dashboard-components/CaloriesAmount';
 import LastMeals from '@/components/dashboard-components/LastMeals';
+import MacrosCounter from '@/components/dashboard-components/MacrosCounter';
 import AppContainer from '@/components/shared/AppContainer';
 import AppSafeView from '@/components/shared/AppSafeView';
 import { getAllMeals } from '@/db/actions/meals/getMeals';
@@ -50,6 +51,7 @@ export default function Index() {
     <AppSafeView>
       <AppContainer>
         <CaloriesAmount kcal={todayCalories.kcal} goalCalories={user.calorieRequirement} />
+        <MacrosCounter meals={todayMeals} user={user} />
         <MacrosChart meals={todayMeals} user={user} />
         <HydrationLevel value={1000} max={user.waterGoal} />
         <LastMeals meals={todayMeals} />

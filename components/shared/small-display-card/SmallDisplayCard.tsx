@@ -11,17 +11,23 @@ type PropsType = {
     iconName?: IoniconsProps['name']
     title: string
     textValue: string
-    dotColor?: string
+    dotColor?: string,
+    backGroundColor?: string,
+    dotSize?: number
 }
 
-export default function SmallDisplayCard({ iconName, title, textValue, dotColor = grayColor }: PropsType) {
+export default function SmallDisplayCard({ iconName, title, textValue, dotColor = grayColor, backGroundColor = grayMutedBackground, dotSize = 18 }: PropsType) {
     return (
-        <AppCard style={styles.mediumCard}>
-            <View style={styles.iconWrapper}>
+        <AppCard style={[styles.mediumCard, { backgroundColor: backGroundColor }]}>
+            <View style={[styles.iconWrapper, { width: dotSize + 10 }]}>
                 {iconName ?
                     <Ionicons name={iconName} size={28}></Ionicons>
                     :
-                    <View style={[styles.dot, { backgroundColor: dotColor }]} />
+                    <View style={[styles.dot, {
+                        backgroundColor: dotColor,
+                        width: dotSize,
+                        height: dotSize
+                    }]} />
                 }
             </View>
             <View>
@@ -35,18 +41,16 @@ export default function SmallDisplayCard({ iconName, title, textValue, dotColor 
 const styles = StyleSheet.create({
     mediumCard: {
         width: '30%',
-        backgroundColor: grayMutedBackground,
         flexDirection: 'row',
         alignItems: 'center',
         gap: 8,
         flexGrow: 1,
     },
     iconWrapper: {
-        width: 28, alignItems: 'center'
+        // width: 28,
+        alignItems: 'center'
     },
     dot: {
-        width: 18,
-        height: 18,
         borderRadius: '50%',
         marginRight: 6,
     },
