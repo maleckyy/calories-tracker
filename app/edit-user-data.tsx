@@ -7,11 +7,13 @@ import { useUserStore } from '@/stores/user/useUserStore'
 import { User } from '@/types/user.type'
 import { useRouter } from 'expo-router'
 import React from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function EditUserDataScreen() {
     const user = useUserStore(state => state.user)
     const setUserDate = useUserStore(state => state.setUser)
     const router = useRouter()
+    const insets = useSafeAreaInsets();
 
     function updateUserDataFn(data: User) {
         const updatedUser = updateUser(data)
@@ -22,7 +24,7 @@ export default function EditUserDataScreen() {
     }
 
     return (
-        <AppSafeView>
+        <AppSafeView paddingBottom={insets.bottom} buttonsBackground>
             <AppContainer>
                 <ScreenHeader title='Edit Profile' backHref={'/(tabs)/profile'} />
                 {user && <ProfileForm initialData={user} onSubmit={updateUserDataFn} />}

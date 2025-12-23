@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         padding: 0,
         overflow: 'hidden',
         backgroundColor: whiteColor,
-        paddingBlock: 8, paddingInline: 12
+        paddingBlock: 8,
+        paddingInline: 12
     },
 })
