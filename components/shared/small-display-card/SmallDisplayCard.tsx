@@ -1,4 +1,4 @@
-import { grayColor, grayMutedBackground } from '@/consts/colors/colors';
+import { grayCardBackground, grayColor } from '@/consts/colors/colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -16,7 +16,7 @@ type PropsType = {
     dotSize?: number
 }
 
-export default function SmallDisplayCard({ iconName, title, textValue, dotColor = grayColor, backGroundColor = grayMutedBackground, dotSize = 18 }: PropsType) {
+export default function SmallDisplayCard({ iconName, title, textValue, dotColor = grayColor, backGroundColor = grayCardBackground, dotSize = 18 }: PropsType) {
     return (
         <AppCard style={[styles.mediumCard, { backgroundColor: backGroundColor }]}>
             <View style={[styles.iconWrapper, { width: dotSize + 10 }]}>

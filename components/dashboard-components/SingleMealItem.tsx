@@ -1,4 +1,4 @@
-import { grayMutedBackground } from '@/consts/colors/colors'
+import { grayCardBackground } from '@/consts/colors/colors'
 import { Meal } from '@/types/meal.type'
 import { formatDate } from '@/utils/formatDate/formatDate'
 import Ionicons from '@expo/vector-icons/Ionicons'
@@ -80,7 +80,7 @@ export default memo(SingleMealItem)
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: grayMutedBackground,
+        backgroundColor: grayCardBackground,
         flexDirection: 'column',
         gap: 6,
         borderRadius: 10,

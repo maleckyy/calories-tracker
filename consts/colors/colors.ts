@@ -4,6 +4,7 @@ export const blackColor = '#25292e'
 export const grayColor = '#7A7A73'
 export const grayBackground = '#E6E6E6'
 export const grayMutedBackground = '#ebebebff'
+export const grayCardBackground = '#f5f5f5ff'
 export const dangerColor = '#FF3838'
 export const hydrationLevelColor = '#2196F3'
 

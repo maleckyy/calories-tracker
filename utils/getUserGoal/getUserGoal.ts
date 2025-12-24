@@ -5,7 +5,7 @@ export function getUserGoal(name: GoalType) {
         case 'loseWeight':
             return 'Weight loss'
         case 'maintain':
-            return 'Weight maintence '
+            return 'Maintence '
         default:
             return 'Weight gain'
     }
