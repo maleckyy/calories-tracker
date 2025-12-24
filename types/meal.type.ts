@@ -10,3 +10,8 @@ export type Meal = {
     id: string
     date: string
 } & MealCreate
+
+export type MealGroup = {
+    day: string,
+    meals: Meal[]
+}

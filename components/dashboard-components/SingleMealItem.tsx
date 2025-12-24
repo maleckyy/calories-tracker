@@ -1,5 +1,6 @@
-import { whiteColor } from '@/consts/colors/colors'
+import { grayCardBackground } from '@/consts/colors/colors'
 import { Meal } from '@/types/meal.type'
+import { formatDate } from '@/utils/formatDate/formatDate'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
 import React, { memo } from 'react'
@@ -9,13 +10,14 @@ import { AppText } from '../shared/text/AppText'
 type PropsType = {
     meal: Meal
     deleteFn: (id: string) => void
+    showDate?: boolean
 }
 
-function SingleMealItem({ meal, deleteFn }: PropsType) {
+function SingleMealItem({ meal, deleteFn, showDate = false }: PropsType) {
     const router = useRouter()
 
     function handleEdit(item: Meal) {
-        router.replace(`/edit-meal?id=${meal.id}`)
+        router.replace(`/edit-meal?id=${item.id}`)
     }
 
     function handleDelete(id: string) {
@@ -66,6 +68,9 @@ function SingleMealItem({ meal, deleteFn }: PropsType) {
                     Fat {meal.fat}g
                 </AppText>
             </View>
+            {showDate && <View style={styles.containerDate}>
+                <AppText variant='base'>{formatDate(meal.date)}</AppText>
+            </View>}
         </View>
     )
 }
@@ -75,7 +80,7 @@ export default memo(SingleMealItem)
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: whiteColor,
+        backgroundColor: grayCardBackground,
         flexDirection: 'column',
         gap: 6,
         borderRadius: 10,
@@ -98,5 +103,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         gap: 16
+    },
+    containerDate: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
 })

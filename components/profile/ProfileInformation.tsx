@@ -1,4 +1,6 @@
+import { gapBetweenSection } from '@/consts/spacing/gaps'
 import { User } from '@/types/user.type'
+import { formatDate } from '@/utils/formatDate/formatDate'
 import { getGenderName } from '@/utils/getGenderName/getGenderName'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import React, { memo } from 'react'
@@ -18,7 +20,7 @@ function ProfileInformation({ user, redirect }: PropsType) {
                 <View style={styles.containerUserWrapper}>
                     <View style={styles.containerUser}>
                         <AppText variant='xlarge'>{user.username}</AppText>
-                        <AppText >Date of birth: {user.birthDate}</AppText>
+                        <AppText >Date of birth: {formatDate(user.birthDate)}</AppText>
                         <AppText >Gender: {getGenderName(user.gender)}</AppText>
                     </View>
                     <TouchableOpacity style={{ paddingBlock: 4 }} onPress={redirect}>
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         width: '100%',
-        gap: 8
+        gap: gapBetweenSection
     },
     containerUserWrapper: {
         flexDirection: 'row',
@@ -65,6 +67,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        gap: 8
+        gap: gapBetweenSection
     },
 });

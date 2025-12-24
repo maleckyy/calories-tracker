@@ -1,4 +1,5 @@
 import AppLoading from "@/components/shared/AppLoading";
+import { clearOldMeals } from "@/db/actions/meals/clearOldMeals";
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import { useEffect } from "react";
@@ -12,6 +13,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     initDB()
+    clearOldMeals()
   }, [])
 
   if (!fontsLoaded) return <AppLoading />
@@ -27,6 +29,13 @@ export default function RootLayout() {
       />
       <Stack.Screen
         name="edit-user-data"
+        options={{
+          presentation: 'modal',
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="all-meals"
         options={{
           presentation: 'modal',
           headerShown: false

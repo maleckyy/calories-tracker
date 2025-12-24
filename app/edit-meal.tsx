@@ -7,9 +7,11 @@ import { useMealStore } from '@/stores/meals/useMealsStore'
 import { Meal, MealCreate } from '@/types/meal.type'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import React from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 export default function EditMealScreen() {
     const router = useRouter()
     const { id } = useLocalSearchParams()
+    const insets = useSafeAreaInsets();
 
     const { meals, updateMeal: updateMealToStore } = useMealStore()
     const meal = meals.find(m => m.id === id)
@@ -25,7 +27,7 @@ export default function EditMealScreen() {
     }
 
     return (
-        <AppSafeView>
+        <AppSafeView paddingBottom={insets.bottom} buttonsBackground>
             <AppContainer>
                 <ScreenHeader title='Edit meal' backHref={'/(tabs)'} />
                 <MealForm onSubmit={updateMealToDb} initialData={meal} />

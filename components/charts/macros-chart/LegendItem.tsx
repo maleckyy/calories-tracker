@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, View } from "react-native"
-import { AppText } from "../shared/text/AppText"
+import { AppText } from "../../shared/text/AppText"
 
 type LegendItemProps = {
     color: string

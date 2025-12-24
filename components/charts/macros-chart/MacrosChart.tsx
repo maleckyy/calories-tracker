@@ -1,15 +1,22 @@
+import { AppCard } from '@/components/shared/AppCard';
 import { grayBackground, macrosColors, whiteColor } from '@/consts/colors/colors';
+import { gapBetweenSection } from '@/consts/spacing/gaps';
 import { Meal } from '@/types/meal.type';
+import { User } from '@/types/user.type';
 import React, { memo } from 'react';
 import { Dimensions, View } from 'react-native';
 import { ProgressChart } from 'react-native-chart-kit';
 import { AbstractChartConfig } from 'react-native-chart-kit/dist/AbstractChart';
-import { AppCard } from '../shared/AppCard';
 import { LegendItem } from './LegendItem';
 
 const screenWidth = Dimensions.get('window').width - 60
 
-function MacrosChart({ meals }: { meals: Meal[] }) {
+type PropsType = {
+    meals: Meal[],
+    user: User
+}
+
+function MacrosChart({ meals, user }: PropsType) {
     const totals = meals.reduce(
         (acc, meal) => {
             acc.protein += meal.protein
@@ -31,9 +38,9 @@ function MacrosChart({ meals }: { meals: Meal[] }) {
         ],
         data: totalMacros > 0
             ? [
-                totals.protein / totalMacros,
-                totals.carbs / totalMacros,
-                totals.fat / totalMacros,
+                Math.min(totals.protein / user.proteinRequirement, 1),
+                Math.min(totals.carbs / user.carbsRequirement, 1),
+                Math.min(totals.fat / user.fatRequirement, 1)
             ]
             : [0, 0, 0]
     }
@@ -49,11 +56,13 @@ function MacrosChart({ meals }: { meals: Meal[] }) {
             fontSize: 12,
         }
     }
+
     return (
         <AppCard
             style={{
                 alignItems: "center",
                 justifyContent: "center",
+                paddingTop: -16
             }}>
             <ProgressChart
                 data={data}
@@ -69,8 +78,7 @@ function MacrosChart({ meals }: { meals: Meal[] }) {
                 flexDirection: 'row',
                 alignItems: "center",
                 justifyContent: "center",
-                marginBottom: 12,
-                gap: 8
+                gap: gapBetweenSection
             }}>
                 <LegendItem color={macrosColors.protein} label={"Protein | " + totals.protein + "g"} />
                 <LegendItem color={macrosColors.carbs} label={"Carbs | " + totals.carbs + "g"} />
