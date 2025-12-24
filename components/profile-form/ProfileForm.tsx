@@ -258,8 +258,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        padding: gapBetweenSection
-
+        padding: gapBetweenSection / 2
     },
     title: {
         fontSize: 24,
