@@ -1,23 +1,14 @@
 import { blackColor, dangerColor, grayBackground } from '@/consts/colors/colors';
 import { gapBetweenSection } from '@/consts/spacing/gaps';
+import { MealFormValues, mealSchema } from '@/schemas/meal-schema/mealSchema';
 import { Meal, MealCreate } from '@/types/meal.type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import * as z from 'zod';
+import { AppCard } from '../shared/AppCard';
 import BaseButton from '../shared/buttons/BaseButton';
-
-const mealSchema = z.object({
-    name: z.string().min(3, 'Nazwa musi mieć min. 3 znaki'),
-    kcal: z.string().min(1, 'Wartość nie może być ujemna'),
-    protein: z.string().min(1),
-    carbs: z.string().min(1),
-    fat: z.string().min(1),
-});
-
-type MealFormValues = z.infer<typeof mealSchema>;
 
 interface MealFormProps {
     initialData?: Meal;
@@ -65,88 +56,92 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
     };
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.field}>
-                <Text style={styles.label}>Meal name</Text>
-                <Controller
-                    control={control}
-                    name="name"
-                    render={({ field: { onChange, value } }) => (
-                        <TextInput
-                            style={[styles.input, errors.name && styles.inputError]}
-                            onChangeText={onChange}
-                            value={value}
-                            placeholder="Steak with potatos"
+        <AppCard>
+            <ScrollView style={styles.container}>
+                <View style={styles.field}>
+                    <Text style={styles.label}>Meal name</Text>
+                    <Controller
+                        control={control}
+                        name="name"
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                style={[styles.input, errors.name && styles.inputError]}
+                                onChangeText={onChange}
+                                value={value}
+                                placeholder="Steak with potatos"
+                            />
+                        )}
+                    />
+                    {errors.name && <Text style={styles.errorText}>{errors.name.message}</Text>}
+                </View>
+
+                <View style={styles.field}>
+                    <Text style={styles.label}>Calories (kcal)</Text>
+                    <Controller
+                        control={control}
+                        name="kcal"
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChange}
+                                value={value.toString()}
+                                keyboardType="numeric"
+                            />
+                        )}
+                    />
+                </View>
+
+                <View style={styles.macroRow}>
+                    <View style={styles.macroCol}>
+                        <Text style={styles.label}>Protein (g)</Text>
+                        <Controller
+                            control={control}
+                            name="protein"
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
+                            )}
                         />
-                    )}
-                />
-                {errors.name && <Text style={styles.errorText}>{errors.name.message}</Text>}
-            </View>
-
-            <View style={styles.field}>
-                <Text style={styles.label}>Calories (kcal)</Text>
-                <Controller
-                    control={control}
-                    name="kcal"
-                    render={({ field: { onChange, value } }) => (
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={onChange}
-                            value={value.toString()}
-                            keyboardType="numeric"
+                    </View>
+                    <View style={styles.macroCol}>
+                        <Text style={styles.label}>Carbs (g)</Text>
+                        <Controller
+                            control={control}
+                            name="carbs"
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
+                            )}
                         />
-                    )}
-                />
-            </View>
+                    </View>
+                    <View style={styles.macroCol}>
+                        <Text style={styles.label}>Fat (g)</Text>
+                        <Controller
+                            control={control}
+                            name="fat"
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
+                            )}
+                        />
+                    </View>
+                </View>
 
-            <View style={styles.macroRow}>
-                <View style={styles.macroCol}>
-                    <Text style={styles.label}>Protein (g)</Text>
-                    <Controller
-                        control={control}
-                        name="protein"
-                        render={({ field: { onChange, value } }) => (
-                            <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
-                        )}
+                <View style={{ marginTop: gapBetweenSection }}>
+                    <BaseButton
+                        title={isEditing ? "Save changes" : "Add"}
+                        onPress={handleSubmit(handleFormSubmit)}
+                        disabled={!isValid}
                     />
                 </View>
-                <View style={styles.macroCol}>
-                    <Text style={styles.label}>Carbs (g)</Text>
-                    <Controller
-                        control={control}
-                        name="carbs"
-                        render={({ field: { onChange, value } }) => (
-                            <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
-                        )}
-                    />
-                </View>
-                <View style={styles.macroCol}>
-                    <Text style={styles.label}>Fat (g)</Text>
-                    <Controller
-                        control={control}
-                        name="fat"
-                        render={({ field: { onChange, value } }) => (
-                            <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
-                        )}
-                    />
-                </View>
-            </View>
+            </ScrollView>
+        </AppCard>
 
-            <View style={{ marginTop: gapBetweenSection }}>
-                <BaseButton
-                    title={isEditing ? "Save changes" : "Add"}
-                    onPress={handleSubmit(handleFormSubmit)}
-                    disabled={!isValid}
-                />
-            </View>
-        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%'
+        width: '100%',
+        padding: gapBetweenSection
     },
     title: {
         fontSize: 24,
