@@ -44,6 +44,16 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
+                name="hydration"
+                options={{
+                    title: 'Hydration',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Ionicons name={focused ? 'water' : 'water-outline'} color={color} size={24} />
+                    ),
+                    headerShown: false
+                }}
+            />
+            <Tabs.Screen
                 name="profile"
                 options={{
                     title: 'Profile',
