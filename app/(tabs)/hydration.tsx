@@ -29,7 +29,7 @@ export default function HydrationScreen() {
                 <HydrationLevel value={currentHydrationLevel} max={user.waterGoal} />
                 <HydrationStats waterGoal={user.waterGoal} hydrationLevel={currentHydrationLevel} />
                 <AddHydrationSection />
-                <HydrationHistorySection hydrationArray={hydration} />
+                <HydrationHistorySection />
             </AppContainer>
         </AppSafeView>
     )

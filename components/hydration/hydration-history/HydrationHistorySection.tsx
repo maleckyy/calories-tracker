@@ -1,27 +1,31 @@
 import { AppCard } from '@/components/shared/AppCard'
 import { AppText } from '@/components/shared/text/AppText'
 import { gapBetweenElements } from '@/consts/spacing/gaps'
-import { Hydration } from '@/types/hydration.type'
+import { deleteHydrationById } from '@/db/actions/hydration/deleteHydrationById'
+import { useHydrationStore } from '@/stores/hydration/useHydrationStore'
 import { getTodayHydrationLevel } from '@/utils/hydration/getTodayHydrationLevel'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 import SingleHydrationElement from './SingleHydrationElement'
 
-type PropsType = {
-    hydrationArray: Hydration[]
-}
+function HydrationHistorySection() {
+    const { hydration, removeHydration } = useHydrationStore()
 
-function HydrationHistorySection({ hydrationArray }: PropsType) {
+    const deleteHydrationFromDb = useCallback((id: string) => {
+        const res = deleteHydrationById(id)
+        if (res === true) removeHydration(id)
+    }, [removeHydration])
+
     const todayHydration = useMemo(() => {
-        return getTodayHydrationLevel(hydrationArray).slice()
+        return getTodayHydrationLevel(hydration).slice()
             .sort((a, b) => b.date.localeCompare(a.date));
-    }, [hydrationArray]);
+    }, [hydration]);
 
     return (
         <AppCard style={{ gap: gapBetweenElements }}>
             <AppText variant='large'>History</AppText>
             <View style={styles.container}>
-                {todayHydration.length > 0 && todayHydration.map(h => <SingleHydrationElement key={h.id} hydrationElement={h} />)}
+                {todayHydration.length > 0 && todayHydration.map(h => <SingleHydrationElement key={h.id} hydrationElement={h} deleteFn={deleteHydrationFromDb} />)}
             </View>
         </AppCard>
     )
