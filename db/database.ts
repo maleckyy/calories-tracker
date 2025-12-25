@@ -34,6 +34,14 @@ export const initDB = () => {
   );
 `);
 
+  db.execSync(`
+  CREATE TABLE IF NOT EXISTS hydration (
+    id TEXT PRIMARY KEY,
+    waterAmount INTEGER NOT NULL,
+    date TEXT NOT NULL
+  );
+`);
+
   const userCount = db.getFirstSync<{ count: number }>('SELECT COUNT(*) as count FROM user');
 
   if (userCount?.count === 0) {

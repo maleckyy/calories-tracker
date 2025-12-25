@@ -1,4 +1,5 @@
 import AppLoading from "@/components/shared/AppLoading";
+import { clearOldHydration } from "@/db/actions/hydration/clearOldHydration";
 import { clearOldMeals } from "@/db/actions/meals/clearOldMeals";
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
@@ -14,6 +15,7 @@ export default function RootLayout() {
   useEffect(() => {
     initDB()
     clearOldMeals()
+    clearOldHydration()
   }, [])
 
   if (!fontsLoaded) return <AppLoading />

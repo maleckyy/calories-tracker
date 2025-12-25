@@ -1,9 +1,9 @@
 import { db } from "../../database";
 
-export const deleteMeal = (id: string): boolean => {
+export const deleteHydrationById = (id: string): boolean => {
     try {
         const result = db.runSync(
-            'DELETE FROM meals WHERE id = ?',
+            'DELETE FROM hydration WHERE id = ?',
             [id]
         );
         return result.changes > 0;

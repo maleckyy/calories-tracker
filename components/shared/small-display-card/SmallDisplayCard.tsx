@@ -13,23 +13,26 @@ type PropsType = {
     textValue: string
     dotColor?: string,
     backGroundColor?: string,
-    dotSize?: number
+    dotSize?: number,
+    noIcon?: boolean
 }
 
-export default function SmallDisplayCard({ iconName, title, textValue, dotColor = grayColor, backGroundColor = grayCardBackground, dotSize = 18 }: PropsType) {
+export default function SmallDisplayCard({ iconName, title, textValue, dotColor = grayColor, backGroundColor = grayCardBackground, dotSize = 18, noIcon = false }: PropsType) {
     return (
         <AppCard style={[styles.mediumCard, { backgroundColor: backGroundColor }]}>
-            <View style={[styles.iconWrapper, { width: dotSize + 10 }]}>
-                {iconName ?
-                    <Ionicons name={iconName} size={28}></Ionicons>
-                    :
-                    <View style={[styles.dot, {
-                        backgroundColor: dotColor,
-                        width: dotSize,
-                        height: dotSize
-                    }]} />
-                }
-            </View>
+            {!noIcon &&
+                <View style={[styles.iconWrapper, { width: dotSize + 10 }]}>
+                    {iconName ?
+                        <Ionicons name={iconName} size={28}></Ionicons>
+                        :
+                        <View style={[styles.dot, {
+                            backgroundColor: dotColor,
+                            width: dotSize,
+                            height: dotSize
+                        }]} />
+                    }
+                </View>
+            }
             <View>
                 <AppText variant='medium'>{title}</AppText>
                 <AppText>{textValue}</AppText>
