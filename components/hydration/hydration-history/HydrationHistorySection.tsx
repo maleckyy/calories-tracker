@@ -26,6 +26,7 @@ function HydrationHistorySection() {
             <AppText variant='large'>History</AppText>
             <View style={styles.container}>
                 {todayHydration.length > 0 && todayHydration.map(h => <SingleHydrationElement key={h.id} hydrationElement={h} deleteFn={deleteHydrationFromDb} />)}
+                {todayHydration.length === 0 && <AppText>No hydration yet</AppText>}
             </View>
         </AppCard>
     )
