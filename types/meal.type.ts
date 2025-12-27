@@ -15,3 +15,7 @@ export type MealGroup = {
     day: string,
     meals: Meal[]
 }
+
+export type SavedMeal = {
+    id: string
+} & MealCreate
