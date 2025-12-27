@@ -1,14 +1,18 @@
-import { blackColor, dangerColor, grayBackground } from '@/consts/colors/colors';
-import { gapBetweenSection } from '@/consts/spacing/gaps';
+import { blackColor, dangerColor, grayBackground, grayMutedBackground, mainColor } from '@/consts/colors/colors';
+import { gapBetweenElements, gapBetweenSection } from '@/consts/spacing/gaps';
+import { saveMeal } from '@/db/actions/saved-meals/saveMeal';
 import { MealFormValues, mealSchema } from '@/schemas/meal-schema/mealSchema';
+import { useSavedMealsStore } from '@/stores/saved-meals/useSavedMealsStore';
 import { Meal, MealCreate } from '@/types/meal.type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { AppCard } from '../shared/AppCard';
 import BaseButton from '../shared/buttons/BaseButton';
+import AppTextInput from '../shared/inputs/AppTextInput';
+import { AppText } from '../shared/text/AppText';
 
 interface MealFormProps {
     initialData?: Meal;
@@ -18,6 +22,8 @@ interface MealFormProps {
 export default function MealForm({ initialData, onSubmit }: MealFormProps) {
     const router = useRouter();
     const isEditing = !!initialData;
+    const [enabled, setEnabled] = useState(false);
+    const { addSavedMeal } = useSavedMealsStore()
 
     const { control, handleSubmit, formState: { errors, isValid }, reset } = useForm<MealFormValues>({
         resolver: zodResolver(mealSchema),
@@ -49,6 +55,10 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
             onSubmit({ ...initialData, ...convertedData })
         } else {
             onSubmit({ ...convertedData })
+            if (enabled) {
+                const savedMeal = saveMeal(convertedData)
+                addSavedMeal(savedMeal)
+            }
         }
 
         reset()
@@ -64,7 +74,7 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
                         control={control}
                         name="name"
                         render={({ field: { onChange, value } }) => (
-                            <TextInput
+                            <AppTextInput
                                 style={[styles.input, errors.name && styles.inputError]}
                                 onChangeText={onChange}
                                 value={value}
@@ -81,7 +91,7 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
                         control={control}
                         name="kcal"
                         render={({ field: { onChange, value } }) => (
-                            <TextInput
+                            <AppTextInput
                                 style={styles.input}
                                 onChangeText={onChange}
                                 value={value.toString()}
@@ -98,7 +108,7 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
                             control={control}
                             name="protein"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
                             )}
                         />
                     </View>
@@ -108,7 +118,7 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
                             control={control}
                             name="carbs"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
                             )}
                         />
                     </View>
@@ -118,13 +128,24 @@ export default function MealForm({ initialData, onSubmit }: MealFormProps) {
                             control={control}
                             name="fat"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value.toString()} keyboardType="numeric" />
                             )}
                         />
                     </View>
                 </View>
 
-                <View style={{ marginTop: gapBetweenSection }}>
+                {!isEditing && <View style={[styles.field, styles.toggleWrapper]}>
+                    <Pressable
+                        style={[styles.toggle, enabled && styles.toggleOn]}
+                        onPress={() => setEnabled(prev => !prev)}
+                    >
+                        <View style={[styles.circle, enabled && styles.circleOn]} />
+                    </Pressable>
+
+                    <AppText variant='medium'>Add to favourites?</AppText>
+                </View>}
+
+                <View style={{ marginTop: isEditing ? gapBetweenSection : 0 }}>
                     <BaseButton
                         title={isEditing ? "Save changes" : "Add"}
                         onPress={handleSubmit(handleFormSubmit)}
@@ -175,8 +196,33 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         gap: 10,
+        marginBottom: gapBetweenSection,
     },
     macroCol: {
         flex: 1,
+    },
+    toggleWrapper: {
+        flexDirection: 'row',
+        gap: gapBetweenElements,
+        alignItems: 'center',
+    },
+    toggle: {
+        width: 60,
+        height: 28,
+        borderRadius: 16,
+        backgroundColor: grayMutedBackground,
+        padding: 2,
+    },
+    toggleOn: {
+        backgroundColor: mainColor,
+    },
+    circle: {
+        width: 24,
+        height: 24,
+        borderRadius: 14,
+        backgroundColor: "#fff",
+    },
+    circleOn: {
+        alignSelf: "flex-end",
     },
 });
