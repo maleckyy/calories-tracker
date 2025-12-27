@@ -7,9 +7,11 @@ import AppContainer from '@/components/shared/AppContainer';
 import AppSafeView from '@/components/shared/AppSafeView';
 import { getHydration } from '@/db/actions/hydration/getHydration';
 import { getAllMeals } from '@/db/actions/meals/getMeals';
+import { getSavedMeals } from '@/db/actions/saved-meals/getSavedMeals';
 import { getUserData } from '@/db/actions/user/getUserData';
 import { useHydrationStore } from '@/stores/hydration/useHydrationStore';
 import { useMealStore } from '@/stores/meals/useMealsStore';
+import { useSavedMealsStore } from '@/stores/saved-meals/useSavedMealsStore';
 import { useUserStore } from '@/stores/user/useUserStore';
 import { getTodayHydrationLevel } from '@/utils/hydration/getTodayHydrationLevel';
 import { getTodayMeals } from '@/utils/meals/getTodayMeals';
@@ -19,6 +21,7 @@ export default function Index() {
   const { setMeals } = useMealStore()
   const meals = useMealStore(state => state.meals)
   const { user, setUser } = useUserStore()
+  const { setSavedMeals } = useSavedMealsStore()
   const { hydration, setHydration } = useHydrationStore()
 
   const fetchMeals = useCallback(() => {
@@ -30,6 +33,11 @@ export default function Index() {
     const hydrationData = getHydration()
     setHydration(hydrationData);
   }, [setHydration]);
+
+  const fetchSavedMeals = useCallback(() => {
+    const savedMeals = getSavedMeals()
+    setSavedMeals(savedMeals);
+  }, [setSavedMeals]);
 
   const todayMeals = useMemo(() => {
     return getTodayMeals(meals)
@@ -59,6 +67,10 @@ export default function Index() {
   useEffect(() => {
     fetchHydration();
   }, [fetchHydration]);
+
+  useEffect(() => {
+    fetchSavedMeals();
+  }, [fetchSavedMeals]);
 
   useEffect(() => {
     const user = getUserData()

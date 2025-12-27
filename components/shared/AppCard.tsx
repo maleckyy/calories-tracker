@@ -1,4 +1,5 @@
 import { whiteColor } from "@/consts/colors/colors"
+import { gapBetweenElements } from "@/consts/spacing/gaps"
 import React from "react"
 import { StyleSheet, View, ViewProps } from "react-native"
 
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         backgroundColor: whiteColor,
         paddingBlock: 8,
-        paddingInline: 12
+        paddingInline: 12,
+        gap: gapBetweenElements
     },
 })
