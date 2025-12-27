@@ -1,15 +1,24 @@
-import { whiteColor } from "@/consts/colors/colors"
+import { grayCardBackground, whiteColor } from "@/consts/colors/colors"
 import { gapBetweenElements } from "@/consts/spacing/gaps"
 import React from "react"
 import { StyleSheet, View, ViewProps } from "react-native"
 
 type CardProps = ViewProps & {
-    children: React.ReactNode
+    children: React.ReactNode,
+    darkBg?: boolean
 }
 
-export function AppCard({ children, style, ...rest }: CardProps) {
+export function AppCard({ children, darkBg = false, style, ...rest }: CardProps) {
     return (
-        <View style={[styles.card, style]} {...rest}>
+        <View
+            style={
+                [
+                    styles.card,
+                    { backgroundColor: darkBg ? grayCardBackground : whiteColor },
+                    style,
+                ]
+            }
+            {...rest}>
             {children}
         </View>
     )
@@ -21,7 +30,6 @@ const styles = StyleSheet.create({
         width: "100%",
         padding: 0,
         overflow: 'hidden',
-        backgroundColor: whiteColor,
         paddingBlock: 8,
         paddingInline: 12,
         gap: gapBetweenElements
