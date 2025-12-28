@@ -1,13 +1,15 @@
 import { deleteMeal } from '@/db/actions/meals/deleteMealById'
 import { useMealStore } from '@/stores/meals/useMealsStore'
+import { useRouter } from 'expo-router'
 import React, { useCallback } from 'react'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import SingleMealItem from '../dashboard-components/SingleMealItem'
 import { AppCard } from '../shared/AppCard'
 import { AppText } from '../shared/text/AppText'
 
 export default function RecentlyAddedMeals() {
     const { meals, removeMeal } = useMealStore()
-
+    const router = useRouter()
     const sortedMeals = meals.slice().sort((a, b) => b.date.localeCompare(a.date));
 
     const deleteMealById = useCallback((id: string) => {
@@ -19,8 +21,31 @@ export default function RecentlyAddedMeals() {
 
     return (
         <AppCard>
-            <AppText variant='large'>Recently added</AppText>
+            <View style={styles.sectionWrapper}>
+                <AppText variant='large'>Recently added</AppText>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.replace('/all-meals')}>
+                    <AppText variant='base' bold>See all</AppText>
+                </TouchableOpacity>
+            </View>
             {sortedMeals.length > 0 && sortedMeals.slice(0, 5).map(m => <SingleMealItem key={m.id} meal={m} deleteFn={deleteMealById} />)}
         </AppCard>
     )
 }
+
+const styles = StyleSheet.create({
+    sectionWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    buttonWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 4,
+        paddingBlock: 4,
+        paddingInline: 8,
+        borderWidth: 1,
+        borderRadius: 10,
+    }
+})

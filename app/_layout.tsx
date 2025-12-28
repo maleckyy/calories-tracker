@@ -50,6 +50,13 @@ export default function RootLayout() {
           headerShown: false
         }}
       />
+      <Stack.Screen
+        name="all-saved-meals"
+        options={{
+          presentation: 'modal',
+          headerShown: false
+        }}
+      />
     </Stack>
   )
 }

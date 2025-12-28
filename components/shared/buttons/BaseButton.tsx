@@ -1,4 +1,5 @@
 import { blackColor, dangerColor, grayBackground, grayColor, mainColor, whiteColor } from '@/consts/colors/colors';
+import { baseBorderRadius } from '@/consts/spacing/border';
 import React from 'react';
 import {
     StyleProp,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     base: {
         paddingVertical: 12,
         paddingHorizontal: 20,
-        borderRadius: 12,
+        borderRadius: baseBorderRadius,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
