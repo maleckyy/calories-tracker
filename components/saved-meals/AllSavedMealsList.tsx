@@ -1,12 +1,12 @@
-import { gapBetweenSection } from '@/consts/spacing/gaps';
+import { blackColor } from '@/consts/colors/colors';
 import { addMeal } from '@/db/actions/meals/createMeal';
 import { deleteSavedMeal } from '@/db/actions/saved-meals/deleteSavedMeal';
 import { useMealStore } from '@/stores/meals/useMealsStore';
 import { useSavedMealsStore } from '@/stores/saved-meals/useSavedMealsStore';
-import { MealCreate } from '@/types/meal.type';
+import { MealCreate, SavedMeal } from '@/types/meal.type';
 import { useRouter } from 'expo-router';
-import React, { useCallback } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import AppTextInput from '../shared/inputs/AppTextInput';
 import { AppText } from '../shared/text/AppText';
 import SavedMealListElement from './SavedMealListElement';
 
@@ -14,6 +14,9 @@ export default function AllSavedMealsList() {
     const { savedMeals, removeSavedMeal } = useSavedMealsStore()
     const { addMeal: addMealToStore } = useMealStore()
     const router = useRouter()
+    const [results, setResults] = useState<SavedMeal[]>(savedMeals)
+    const [query, setQuery] = useState<string>('')
+
 
     function addSavedMeal(newMeal: MealCreate) {
         const createdMeal = addMeal(newMeal);
@@ -27,18 +30,27 @@ export default function AllSavedMealsList() {
         }
     }, [removeSavedMeal])
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (query.trim().length >= 1) {
+                const filtered = savedMeals.filter(item =>
+                    item.name.toLowerCase().includes(query.toLowerCase())
+                );
+                setResults(filtered);
+            } else {
+                setResults(savedMeals);
+            }
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [query, savedMeals])
+
     return (
-        <View style={styles.container}>
-            {savedMeals.length > 0 && savedMeals.map(sm => <SavedMealListElement key={sm.id} savedMeal={sm} addMealFn={addSavedMeal} deleteFn={deleteSavedMealById} />)}
+        <>
+            <AppTextInput placeholder='Find meal by name' style={{ borderColor: blackColor, borderWidth: 2, width: '100%' }} onChangeText={setQuery} />
+            {savedMeals.length > 0 && results.map(sm => <SavedMealListElement key={sm.id} savedMeal={sm} addMealFn={addSavedMeal} deleteFn={deleteSavedMealById} />)}
             {savedMeals.length === 0 && <AppText variant='medium' style={{ textAlign: 'center' }}>No meals saved</AppText>}
-        </View>
+            {results.length === 0 && <AppText variant='medium' style={{ textAlign: 'center' }}>No such meals found</AppText>}
+        </>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        width: "100%",
-        gap: gapBetweenSection
-    }
-})
