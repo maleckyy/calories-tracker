@@ -46,7 +46,7 @@ function SingleHydrationElement({ hydrationElement, deleteFn }: PropsType) {
                     <AppText>{formatTime(hydrationElement.date)}</AppText>
                 </View>
                 <TouchableOpacity onPress={() => showMenu(hydrationElement)}>
-                    <Ionicons name='remove-circle-outline' size={22} />
+                    <Ionicons name='remove-circle-outline' size={28} />
                 </TouchableOpacity>
             </View>
         </AppCard>

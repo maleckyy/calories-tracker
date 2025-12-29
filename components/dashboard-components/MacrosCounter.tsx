@@ -1,5 +1,5 @@
 import { macrosColors, whiteColor } from '@/consts/colors/colors'
-import { gapBetweenSection } from '@/consts/spacing/gaps'
+import { gapBetweenElements } from '@/consts/spacing/gaps'
 import { Meal } from '@/types/meal.type'
 import { User } from '@/types/user.type'
 import React, { memo } from 'react'
@@ -58,6 +58,6 @@ export default memo(MacrosCounter)
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        gap: gapBetweenSection
+        gap: gapBetweenElements
     }
 })

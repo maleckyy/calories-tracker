@@ -1,16 +1,16 @@
 import { deleteMeal } from '@/db/actions/meals/deleteMealById'
 import { useMealStore } from '@/stores/meals/useMealsStore'
-import { Meal } from '@/types/meal.type'
 import { useRouter } from 'expo-router'
 import React, { useCallback } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import SingleMealItem from '../dashboard-components/SingleMealItem'
 import { AppCard } from '../shared/AppCard'
 import { AppText } from '../shared/text/AppText'
-import SingleMealItem from './SingleMealItem'
 
-export default function LastMeals({ meals }: { meals: Meal[] }) {
-    const { removeMeal } = useMealStore()
+export default function RecentlyAddedMeals() {
+    const { meals, removeMeal } = useMealStore()
     const router = useRouter()
+    const sortedMeals = meals.slice().sort((a, b) => b.date.localeCompare(a.date));
 
     const deleteMealById = useCallback((id: string) => {
         const res = deleteMeal(id)
@@ -22,13 +22,12 @@ export default function LastMeals({ meals }: { meals: Meal[] }) {
     return (
         <AppCard>
             <View style={styles.sectionWrapper}>
-                <AppText variant='large'>{`Today's meals`}</AppText>
+                <AppText variant='large'>Recently added</AppText>
                 <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.replace('/all-meals')}>
                     <AppText variant='base' bold>See all</AppText>
                 </TouchableOpacity>
             </View>
-            {meals.length > 0 && meals.map(m => <SingleMealItem meal={m} key={m.id} deleteFn={deleteMealById} />)}
-            {meals.length === 0 && <AppText>No meals today ;(</AppText>}
+            {sortedMeals.length > 0 && sortedMeals.slice(0, 5).map(m => <SingleMealItem key={m.id} meal={m} deleteFn={deleteMealById} />)}
         </AppCard>
     )
 }

@@ -1,10 +1,13 @@
-import { grayCardBackground } from '@/consts/colors/colors'
-import { Meal } from '@/types/meal.type'
+import { gapBetweenElements } from '@/consts/spacing/gaps'
+import { saveMeal } from '@/db/actions/saved-meals/saveMeal'
+import { useSavedMealsStore } from '@/stores/saved-meals/useSavedMealsStore'
+import { Meal, MealCreate } from '@/types/meal.type'
 import { formatDate } from '@/utils/formatDate/formatDate'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
 import React, { memo } from 'react'
 import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { AppCard } from '../shared/AppCard'
 import { AppText } from '../shared/text/AppText'
 
 type PropsType = {
@@ -15,6 +18,7 @@ type PropsType = {
 
 function SingleMealItem({ meal, deleteFn, showDate = false }: PropsType) {
     const router = useRouter()
+    const { addSavedMeal } = useSavedMealsStore()
 
     function handleEdit(item: Meal) {
         router.replace(`/edit-meal?id=${item.id}`)
@@ -22,6 +26,12 @@ function SingleMealItem({ meal, deleteFn, showDate = false }: PropsType) {
 
     function handleDelete(id: string) {
         deleteFn(id)
+    }
+
+    function addMealToFav(meal: Meal) {
+        const mealCreate: MealCreate = (({ id, date, ...rest }) => rest)(meal);
+        const createdMeal = saveMeal(mealCreate);
+        addSavedMeal(createdMeal)
     }
 
     const showMenu = (item: Meal) => {
@@ -34,7 +44,7 @@ function SingleMealItem({ meal, deleteFn, showDate = false }: PropsType) {
                     style: "destructive",
                     onPress: () => handleDelete(item.id)
                 },
-                { text: "Cancel", style: "cancel" },
+                { text: "Save", style: 'default', onPress: () => addMealToFav(item) },
                 { text: "Edit", onPress: () => handleEdit(item) }
             ],
             { cancelable: true }
@@ -42,36 +52,38 @@ function SingleMealItem({ meal, deleteFn, showDate = false }: PropsType) {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.containerName}>
-                <View style={styles.containerData}>
-                    <AppText variant='medium'>
-                        {meal.name}
+        <AppCard darkBg>
+            <View style={styles.container}>
+                <View style={styles.containerName}>
+                    <View style={styles.containerData}>
+                        <AppText variant='medium'>
+                            {meal.name}
+                        </AppText>
+                        <AppText>|</AppText>
+                        <AppText variant='medium'>
+                            {meal.kcal} Kcal
+                        </AppText>
+                    </View>
+                    <TouchableOpacity onPress={() => showMenu(meal)}>
+                        <Ionicons name="ellipsis-vertical-outline" size={19}></Ionicons>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.containerDetails}>
+                    <AppText>
+                        Protein {meal.protein}g
                     </AppText>
-                    <AppText>|</AppText>
-                    <AppText variant='medium'>
-                        {meal.kcal} Kcal
+                    <AppText>
+                        Carbs {meal.carbs}g
+                    </AppText>
+                    <AppText>
+                        Fat {meal.fat}g
                     </AppText>
                 </View>
-                <TouchableOpacity onPress={() => showMenu(meal)}>
-                    <Ionicons name="ellipsis-vertical-outline" size={19}></Ionicons>
-                </TouchableOpacity>
+                {showDate && <View style={styles.containerDate}>
+                    <AppText variant='base'>{formatDate(meal.date)}</AppText>
+                </View>}
             </View>
-            <View style={styles.containerDetails}>
-                <AppText>
-                    Protein {meal.protein}g
-                </AppText>
-                <AppText>
-                    Carbs {meal.carbs}g
-                </AppText>
-                <AppText>
-                    Fat {meal.fat}g
-                </AppText>
-            </View>
-            {showDate && <View style={styles.containerDate}>
-                <AppText variant='base'>{formatDate(meal.date)}</AppText>
-            </View>}
-        </View>
+        </AppCard>
     )
 }
 
@@ -79,13 +91,8 @@ export default memo(SingleMealItem)
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        backgroundColor: grayCardBackground,
         flexDirection: 'column',
         gap: 6,
-        borderRadius: 10,
-        paddingBlock: 8,
-        paddingInline: 12
     },
     containerName: {
         width: '100%',
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        gap: 16
+        gap: gapBetweenElements * 2
     },
     containerDate: {
         width: '100%',

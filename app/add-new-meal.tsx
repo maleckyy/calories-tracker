@@ -6,18 +6,21 @@ import { addMeal } from '@/db/actions/meals/createMeal'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { MealCreate } from '@/types/meal.type'
 import React from 'react'
-export default function AddMealScreen() {
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+export default function AddNewMeal() {
     const { addMeal: addMealToStore } = useMealStore()
+    const insets = useSafeAreaInsets();
 
     function addMealToDb(data: MealCreate) {
         const newMeal = addMeal(data);
         addMealToStore(newMeal)
-    };
+    }
 
     return (
-        <AppSafeView>
+        <AppSafeView paddingBottom={insets.bottom} buttonsBackground>
             <AppContainer>
-                <ScreenHeader title='Add meal' />
+                <ScreenHeader title='Add meal' backHref={'/(tabs)/meals'} />
                 <MealForm onSubmit={addMealToDb} />
             </AppContainer>
         </AppSafeView>

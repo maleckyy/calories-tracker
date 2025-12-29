@@ -1,5 +1,6 @@
 import SmallDisplayCard from '@/components/shared/small-display-card/SmallDisplayCard';
 import { whiteColor } from '@/consts/colors/colors';
+import { gapBetweenElements } from '@/consts/spacing/gaps';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -20,7 +21,7 @@ export default function HydrationStats({ waterGoal, hydrationLevel }: PropsType)
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        gap: 8,
+        gap: gapBetweenElements,
         flexWrap: 'wrap'
     }
 });

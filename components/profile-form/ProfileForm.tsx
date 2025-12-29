@@ -7,9 +7,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { AppCard } from '../shared/AppCard';
 import BaseButton from '../shared/buttons/BaseButton';
+import AppTextInput from '../shared/inputs/AppTextInput';
 
 type PropsType = {
     initialData: User;
@@ -61,7 +62,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                         control={control}
                         name="username"
                         render={({ field: { onChange, value } }) => (
-                            <TextInput
+                            <AppTextInput
                                 style={[styles.input, errors.username && styles.inputError]}
                                 onChangeText={onChange}
                                 value={value}
@@ -117,7 +118,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="weight"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput
+                                <AppTextInput
                                     style={[styles.input, errors.weight && styles.inputError]}
                                     onChangeText={onChange}
                                     value={value}
@@ -132,7 +133,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="height"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput
+                                <AppTextInput
                                     style={[styles.input, errors.height && styles.inputError]}
                                     onChangeText={onChange}
                                     value={value}
@@ -190,7 +191,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="calorieRequirement"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
                             )}
                         />
                     </View>
@@ -203,7 +204,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="waterGoal"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
                             )}
                         />
                     </View>
@@ -213,7 +214,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="proteinRequirement"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
                             )}
                         />
                     </View>
@@ -226,7 +227,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="carbsRequirement"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
                             )}
                         />
                     </View>
@@ -236,7 +237,7 @@ export default function ProfileForm({ initialData: user, onSubmit }: PropsType) 
                             control={control}
                             name="fatRequirement"
                             render={({ field: { onChange, value } }) => (
-                                <TextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
+                                <AppTextInput style={styles.input} onChangeText={onChange} value={value} keyboardType="numeric" />
                             )}
                         />
                     </View>

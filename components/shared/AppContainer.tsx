@@ -1,4 +1,4 @@
-import { gapBetweenSection } from '@/consts/spacing/gaps';
+import { gapBetweenElements } from '@/consts/spacing/gaps';
 import React from 'react';
 import { StyleSheet, View, ViewProps } from 'react-native';
 
@@ -12,6 +12,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        gap: gapBetweenSection,
+        gap: gapBetweenElements,
     },
 });
