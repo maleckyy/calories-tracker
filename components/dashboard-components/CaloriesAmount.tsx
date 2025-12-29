@@ -27,7 +27,7 @@ export default function CaloriesAmount({ kcal, goalCalories }: PropsType) {
 
 const styles = StyleSheet.create({
     container: { width: '100%', marginTop: 4 },
-    caloriesView: { flexDirection: 'row', alignItems: 'flex-start', marginTop: -8, marginBottom: -8 },
+    caloriesView: { flexDirection: 'row', alignItems: 'flex-start', marginTop: -8, marginBottom: -12 },
     caloriesAmountText: { fontSize: 84, lineHeight: 100 },
     caloriesSuffixText: { fontSize: 28, marginTop: 12, marginLeft: 4, color: grayColor }
 }); 

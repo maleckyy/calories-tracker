@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        padding: gapBetweenSection / 2
+        padding: gapBetweenElements / 2
     },
     title: {
         fontSize: 24,
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     field: {
-        marginBottom: gapBetweenSection,
+        marginBottom: gapBetweenElements,
     },
     label: {
         fontSize: 14,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         gap: 10,
-        marginBottom: gapBetweenSection,
+        marginBottom: gapBetweenElements,
     },
     macroCol: {
         flex: 1,

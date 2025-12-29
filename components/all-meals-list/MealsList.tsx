@@ -1,10 +1,8 @@
-import { gapBetweenSection } from '@/consts/spacing/gaps';
 import { deleteMeal } from '@/db/actions/meals/deleteMealById';
 import { useMealStore } from '@/stores/meals/useMealsStore';
 import { Meal, MealGroup } from '@/types/meal.type';
 import { formatDate } from '@/utils/formatDate/formatDate';
 import React, { useCallback } from 'react';
-import { StyleSheet, View } from 'react-native';
 import SingleMealItem from '../dashboard-components/SingleMealItem';
 import { AppCard } from '../shared/AppCard';
 import { AppText } from '../shared/text/AppText';
@@ -41,23 +39,15 @@ export default function MealsList() {
     }, [removeMeal])
 
     return (
-        <View style={styles.container}>
+        <>
             {groupedMeals && groupedMeals.map(g => {
                 return (
-                    <AppCard key={g.day} style={styles.container}>
+                    <AppCard key={g.day}>
                         <AppText variant='large'>{formatDate(g.day)}</AppText>
                         {g && g.meals.map(m => <SingleMealItem meal={m} key={m.id} deleteFn={deleteMealById} showDate />)}
                     </AppCard>
                 )
             })}
-        </View>
+        </>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        width: "100%",
-        gap: gapBetweenSection
-    }
-})

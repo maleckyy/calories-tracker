@@ -1,6 +1,6 @@
 import { AppCard } from '@/components/shared/AppCard';
 import { grayBackground, macrosColors, whiteColor } from '@/consts/colors/colors';
-import { gapBetweenSection } from '@/consts/spacing/gaps';
+import { gapBetweenElements } from '@/consts/spacing/gaps';
 import { Meal } from '@/types/meal.type';
 import { User } from '@/types/user.type';
 import React, { memo } from 'react';
@@ -78,7 +78,7 @@ function MacrosChart({ meals, user }: PropsType) {
                 flexDirection: 'row',
                 alignItems: "center",
                 justifyContent: "center",
-                gap: gapBetweenSection
+                gap: gapBetweenElements * 2
             }}>
                 <LegendItem color={macrosColors.protein} label={"Protein | " + totals.protein + "g"} />
                 <LegendItem color={macrosColors.carbs} label={"Carbs | " + totals.carbs + "g"} />

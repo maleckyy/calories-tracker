@@ -1,6 +1,6 @@
 import { AppCard } from '@/components/shared/AppCard';
 import { AppText } from '@/components/shared/text/AppText';
-import { gapBetweenSection } from '@/consts/spacing/gaps';
+import { gapBetweenElements } from '@/consts/spacing/gaps';
 import { addHydration } from '@/db/actions/hydration/createHydration';
 import { useHydrationStore } from '@/stores/hydration/useHydrationStore';
 import React from 'react';
@@ -16,7 +16,7 @@ export default function AddHydrationSection() {
     }
 
     return (
-        <AppCard style={{ gap: gapBetweenSection }}>
+        <AppCard>
             <AppText variant='large'>Add water</AppText>
             <View style={styles.container}>
                 <AddHydrationCard waterAmount={250} addFn={addHydrationLevel} />
@@ -30,7 +30,7 @@ export default function AddHydrationSection() {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        gap: 8,
+        gap: gapBetweenElements,
         width: '100%'
     },
 });

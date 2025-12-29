@@ -1,4 +1,3 @@
-import { gapBetweenSection } from '@/consts/spacing/gaps'
 import { deleteMeal } from '@/db/actions/meals/deleteMealById'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { Meal } from '@/types/meal.type'
@@ -22,25 +21,19 @@ export default function LastMeals({ meals }: { meals: Meal[] }) {
 
     return (
         <AppCard>
-            <View style={styles.container}>
-                <View style={styles.sectionWrapper}>
-                    <AppText variant='large'>{`Today's meals`}</AppText>
-                    <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.replace('/all-meals')}>
-                        <AppText variant='base' bold>See all</AppText>
-                    </TouchableOpacity>
-                </View>
-                {meals.length > 0 && meals.map(m => <SingleMealItem meal={m} key={m.id} deleteFn={deleteMealById} />)}
-                {meals.length === 0 && <AppText>No meals today ;(</AppText>}
+            <View style={styles.sectionWrapper}>
+                <AppText variant='large'>{`Today's meals`}</AppText>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.replace('/all-meals')}>
+                    <AppText variant='base' bold>See all</AppText>
+                </TouchableOpacity>
             </View>
+            {meals.length > 0 && meals.map(m => <SingleMealItem meal={m} key={m.id} deleteFn={deleteMealById} />)}
+            {meals.length === 0 && <AppText>No meals today ;(</AppText>}
         </AppCard>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: '100%',
-        gap: gapBetweenSection
-    },
     sectionWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-between',

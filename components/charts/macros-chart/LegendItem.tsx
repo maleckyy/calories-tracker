@@ -20,12 +20,11 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: "center",
-        marginRight: 12,
     },
     dot: {
         width: 10,
         height: 10,
-        borderRadius: 5,
+        borderRadius: '50%',
         marginRight: 6,
     },
 })

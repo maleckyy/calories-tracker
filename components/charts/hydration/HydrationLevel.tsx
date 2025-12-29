@@ -1,7 +1,6 @@
 import { AppCard } from '@/components/shared/AppCard';
 import { AppText } from '@/components/shared/text/AppText';
 import { grayMutedBackground, hydrationLevelColor } from '@/consts/colors/colors';
-import { gapBetweenSection } from '@/consts/spacing/gaps';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -36,7 +35,7 @@ export function HydrationLevel({ value, max }: HydrationBarProps) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        gap: gapBetweenSection
+        gap: 8
     },
     textRow: {
         flexDirection: 'row',
