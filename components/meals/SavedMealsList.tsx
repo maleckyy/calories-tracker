@@ -26,7 +26,7 @@ export default function SavedMealsList({ limit = 5 }: PropsType) {
         <AppCard>
             <View style={styles.sectionWrapper}>
                 <AppText variant='large'>Recently saved</AppText>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.replace('/all-saved-meals')}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.push('/all-saved-meals')}>
                     <AppText variant='base' bold>See all</AppText>
                 </TouchableOpacity>
             </View>

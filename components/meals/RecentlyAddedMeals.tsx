@@ -23,7 +23,7 @@ export default function RecentlyAddedMeals() {
         <AppCard>
             <View style={styles.sectionWrapper}>
                 <AppText variant='large'>Recently added</AppText>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.replace('/all-meals')}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.push('/all-meals')}>
                     <AppText variant='base' bold>See all</AppText>
                 </TouchableOpacity>
             </View>

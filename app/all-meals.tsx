@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function AllMealsScreen() {
     const insets = useSafeAreaInsets();
+
     return (
         <AppSafeView paddingBottom={insets.bottom} buttonsBackground>
             <AppContainer>
