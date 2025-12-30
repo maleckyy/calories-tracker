@@ -6,6 +6,8 @@ export const grayBackground = '#E6E6E6'
 export const grayMutedBackground = '#ebebebff'
 export const grayCardBackground = '#f5f5f5ff'
 export const dangerColor = '#FF3838'
+export const successColor = '#54ca50ff'
+export const infoColor = '#59c1ebff'
 export const hydrationLevelColor = '#2196F3'
 
 export const macrosColors = {

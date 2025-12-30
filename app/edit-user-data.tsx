@@ -5,6 +5,7 @@ import ScreenHeader from '@/components/shared/ScreenHeader'
 import { updateUser } from '@/db/actions/user/updateUserData'
 import { useUserStore } from '@/stores/user/useUserStore'
 import { User } from '@/types/user.type'
+import { showToast } from '@/utils/toasts/showToast'
 import { useRouter } from 'expo-router'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -19,6 +20,7 @@ export default function EditUserDataScreen() {
         const updatedUser = updateUser(data)
         if (updatedUser) {
             setUserDate(updatedUser)
+            showToast('success', 'Profile updated')
             router.replace('/(tabs)/profile')
         }
     }
