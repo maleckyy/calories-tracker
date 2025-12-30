@@ -5,6 +5,7 @@ import ScreenHeader from '@/components/shared/ScreenHeader'
 import { updateMeal } from '@/db/actions/meals/updateMeal'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { Meal, MealCreate } from '@/types/meal.type'
+import { showToast } from '@/utils/toasts/showToast'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -20,6 +21,7 @@ export default function EditMealScreen() {
         const updatedMeal = updateMeal(data as Meal)
         if (updatedMeal) {
             updateMealToStore(updatedMeal)
+            showToast('success', 'Meal updated')
         }
     };
     if (!meal) {

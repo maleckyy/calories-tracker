@@ -2,6 +2,7 @@ import { deleteMeal } from '@/db/actions/meals/deleteMealById';
 import { useMealStore } from '@/stores/meals/useMealsStore';
 import { Meal, MealGroup } from '@/types/meal.type';
 import { formatDate } from '@/utils/formatDate/formatDate';
+import { showToast } from '@/utils/toasts/showToast';
 import React, { useCallback } from 'react';
 import SingleMealItem from '../dashboard-components/SingleMealItem';
 import { AppCard } from '../shared/AppCard';
@@ -35,6 +36,7 @@ export default function MealsList() {
         const res = deleteMeal(id)
         if (res === true) {
             removeMeal(id)
+            showToast('success', 'Meal deleted')
         }
     }, [removeMeal])
 

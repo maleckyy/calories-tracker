@@ -3,6 +3,7 @@ import { AppText } from '@/components/shared/text/AppText';
 import { gapBetweenElements } from '@/consts/spacing/gaps';
 import { addHydration } from '@/db/actions/hydration/createHydration';
 import { useHydrationStore } from '@/stores/hydration/useHydrationStore';
+import { showToast } from '@/utils/toasts/showToast';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AddHydrationCard from './AddHydrationCard';
@@ -13,6 +14,7 @@ export default function AddHydrationSection() {
     function addHydrationLevel(amount: number) {
         const newItem = addHydration({ waterAmount: amount })
         addHydrationToStore(newItem)
+        if (newItem) showToast('success', 'Hydration added correctly')
     }
 
     return (

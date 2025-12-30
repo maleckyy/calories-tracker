@@ -4,6 +4,7 @@ import { deleteSavedMeal } from '@/db/actions/saved-meals/deleteSavedMeal';
 import { useMealStore } from '@/stores/meals/useMealsStore';
 import { useSavedMealsStore } from '@/stores/saved-meals/useSavedMealsStore';
 import { MealCreate, SavedMeal } from '@/types/meal.type';
+import { showToast } from '@/utils/toasts/showToast';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import AppTextInput from '../shared/inputs/AppTextInput';
@@ -17,16 +18,19 @@ export default function AllSavedMealsList() {
     const [results, setResults] = useState<SavedMeal[]>(savedMeals)
     const [query, setQuery] = useState<string>('')
 
-
     function addSavedMeal(newMeal: MealCreate) {
         const createdMeal = addMeal(newMeal);
         addMealToStore(createdMeal)
-        if (createdMeal) router.replace('/(tabs)')
+        if (createdMeal) {
+            showToast('success', 'Meal added correctly')
+            router.replace('/(tabs)')
+        }
     }
     const deleteSavedMealById = useCallback((id: string) => {
         const res = deleteSavedMeal(id)
         if (res === true) {
             removeSavedMeal(id)
+            showToast('success', 'Saved meal deleted')
         }
     }, [removeSavedMeal])
 

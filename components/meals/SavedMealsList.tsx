@@ -2,6 +2,7 @@ import { addMeal } from '@/db/actions/meals/createMeal'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { useSavedMealsStore } from '@/stores/saved-meals/useSavedMealsStore'
 import { MealCreate } from '@/types/meal.type'
+import { showToast } from '@/utils/toasts/showToast'
 import { router } from 'expo-router'
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
@@ -20,6 +21,7 @@ export default function SavedMealsList({ limit = 5 }: PropsType) {
     function addSavedMeal(newMeal: MealCreate) {
         const createdMeal = addMeal(newMeal);
         addMealToStore(createdMeal)
+        showToast('success', 'Meal added correctly')
     }
 
     return (

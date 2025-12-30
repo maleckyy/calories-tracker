@@ -1,5 +1,6 @@
 import { deleteMeal } from '@/db/actions/meals/deleteMealById'
 import { useMealStore } from '@/stores/meals/useMealsStore'
+import { showToast } from '@/utils/toasts/showToast'
 import { useRouter } from 'expo-router'
 import React, { useCallback } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
@@ -16,6 +17,7 @@ export default function RecentlyAddedMeals() {
         const res = deleteMeal(id)
         if (res === true) {
             removeMeal(id)
+            showToast('success', 'Meal deleted')
         }
     }, [removeMeal])
 

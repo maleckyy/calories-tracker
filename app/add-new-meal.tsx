@@ -5,6 +5,7 @@ import ScreenHeader from '@/components/shared/ScreenHeader'
 import { addMeal } from '@/db/actions/meals/createMeal'
 import { useMealStore } from '@/stores/meals/useMealsStore'
 import { MealCreate } from '@/types/meal.type'
+import { showToast } from '@/utils/toasts/showToast'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -15,6 +16,7 @@ export default function AddNewMeal() {
     function addMealToDb(data: MealCreate) {
         const newMeal = addMeal(data);
         addMealToStore(newMeal)
+        showToast('success', 'Meal added correctly')
     }
 
     return (
