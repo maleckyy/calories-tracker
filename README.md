@@ -30,6 +30,6 @@ _Meals screen_
 
 _Meal History screen_
 
-![Meal History Screen](/app-images/_MealHistory_.PNG)
+![Meal History Screen](/app-images/MealHistory.PNG)
 
 
