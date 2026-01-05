@@ -49,6 +49,7 @@ export default function BaseButton({
             disabled={disabled}
             style={containerStyles}
             {...props}
+            accessibilityRole="button"
         >
             <Text style={getTextStyle()}>{title}</Text>
         </TouchableOpacity>
