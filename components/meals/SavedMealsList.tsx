@@ -5,8 +5,9 @@ import { MealCreate } from '@/types/meal.type'
 import { showToast } from '@/utils/toasts/showToast'
 import { router } from 'expo-router'
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { AppCard } from '../shared/AppCard'
+import SeeMoreButton from '../shared/buttons/SeeMoreButton'
 import { AppText } from '../shared/text/AppText'
 import SingleSavedMeal from './SingleSavedMeal'
 
@@ -28,9 +29,7 @@ export default function SavedMealsList({ limit = 5 }: PropsType) {
         <AppCard>
             <View style={styles.sectionWrapper}>
                 <AppText variant='large'>Recently saved</AppText>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.push('/all-saved-meals')}>
-                    <AppText variant='base' bold>See all</AppText>
-                </TouchableOpacity>
+                <SeeMoreButton text='See all' onPress={() => router.push('/all-saved-meals')} />
             </View>
             {savedMeals.length > 0 && savedMeals.slice(0, limit).map(sm => <SingleSavedMeal key={sm.id} savedMeal={sm} addMealFn={addSavedMeal} />)}
             {savedMeals.length === 0 && <AppText variant='medium'>No meals saved</AppText>}

@@ -3,9 +3,10 @@ import { useMealStore } from '@/stores/meals/useMealsStore'
 import { showToast } from '@/utils/toasts/showToast'
 import { useRouter } from 'expo-router'
 import React, { useCallback } from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import SingleMealItem from '../dashboard-components/SingleMealItem'
 import { AppCard } from '../shared/AppCard'
+import SeeMoreButton from '../shared/buttons/SeeMoreButton'
 import { AppText } from '../shared/text/AppText'
 
 export default function RecentlyAddedMeals() {
@@ -25,9 +26,7 @@ export default function RecentlyAddedMeals() {
         <AppCard>
             <View style={styles.sectionWrapper}>
                 <AppText variant='large'>Recently added</AppText>
-                <TouchableOpacity style={styles.buttonWrapper} onPress={() => router.push('/all-meals')}>
-                    <AppText variant='base' bold>See all</AppText>
-                </TouchableOpacity>
+                <SeeMoreButton text='See all' onPress={() => router.push('/all-meals')} />
             </View>
             {sortedMeals.length > 0 && sortedMeals.slice(0, 5).map(m => <SingleMealItem key={m.id} meal={m} deleteFn={deleteMealById} />)}
         </AppCard>
