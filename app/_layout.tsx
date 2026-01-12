@@ -61,6 +61,13 @@ export default function RootLayout() {
             headerShown: false
           }}
         />
+        <Stack.Screen
+          name="hydration-history"
+          options={{
+            presentation: 'modal',
+            headerShown: false
+          }}
+        />
       </Stack>
       <Toast config={toastConfig} />
     </>

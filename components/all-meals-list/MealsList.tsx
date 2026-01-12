@@ -15,22 +15,22 @@ export default function MealsList() {
 
     const groupedMeals: MealGroup[] = React.useMemo(() => {
         const groups = sortedMeals.reduce((acc, meal) => {
-            const dayKey = new Date(meal.date).toISOString().split('T')[0];
+            const dayKey = new Date(meal.date).toISOString().split('T')[0]
 
             if (!acc[dayKey]) {
-                acc[dayKey] = [];
+                acc[dayKey] = []
             }
-            acc[dayKey].push(meal);
-            return acc;
-        }, {} as Record<string, Meal[]>);
+            acc[dayKey].push(meal)
+            return acc
+        }, {} as Record<string, Meal[]>)
 
         return Object.entries(groups)
             .map(([day, meals]) => ({
                 day,
                 meals: meals.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
             }))
-            .sort((a, b) => new Date(b.day).getTime() - new Date(a.day).getTime());
-    }, [sortedMeals]);
+            .sort((a, b) => new Date(b.day).getTime() - new Date(a.day).getTime())
+    }, [sortedMeals])
 
     const deleteMealById = useCallback((id: string) => {
         const res = deleteMeal(id)
