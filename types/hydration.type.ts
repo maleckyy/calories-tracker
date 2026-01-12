@@ -6,3 +6,8 @@ export type Hydration = {
     id: string,
     date: string,
 } & HydrationCreate
+
+export type HydrationGroup = {
+    day: string,
+    hydration: Hydration[]
+}
