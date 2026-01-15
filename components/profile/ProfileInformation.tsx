@@ -1,4 +1,5 @@
-import { gapBetweenSection } from '@/consts/spacing/gaps'
+import { grayColor, grayMutedBackground } from '@/consts/colors/colors'
+import { gapBetweenElements } from '@/consts/spacing/gaps'
 import { User } from '@/types/user.type'
 import { formatDate } from '@/utils/formatDate/formatDate'
 import { getGenderName } from '@/utils/getGenderName/getGenderName'
@@ -7,6 +8,7 @@ import React, { memo } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { AppCard } from '../shared/AppCard'
 import { AppText } from '../shared/text/AppText'
+import PhysicalConditionBox from './PhysicalConditionBox'
 
 type PropsType = {
     user: User,
@@ -18,21 +20,22 @@ function ProfileInformation({ user, redirect }: PropsType) {
         <AppCard>
             <View style={styles.containerMain}>
                 <View style={styles.containerUserWrapper}>
-                    <View style={styles.containerUser}>
-                        <AppText variant='xlarge'>{user.username}</AppText>
-                        <AppText >Date of birth: {formatDate(user.birthDate)}</AppText>
-                        <AppText >Gender: {getGenderName(user.gender)}</AppText>
+                    <View style={styles.containerUserDetails}>
+                        <Ionicons name='person-circle-outline' size={64} color={grayColor}></Ionicons>
+                        <View style={styles.containerUser}>
+                            <AppText variant='xlarge'>{user.username}</AppText>
+                            <AppText >Date of birth: {formatDate(user.birthDate)}</AppText>
+                            <AppText >Gender: {getGenderName(user.gender)}</AppText>
+                        </View>
                     </View>
                     <TouchableOpacity style={{ paddingBlock: 4 }} onPress={redirect}>
-                        <Ionicons name="settings" size={24}></Ionicons>
+                        <Ionicons name='settings' size={24}></Ionicons>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.containerDetailsWrapper}>
-                    <AppText variant='medium'>Physical condition of the user</AppText>
-                    <View style={styles.containerDetails}>
-                        <AppText>{user.weight} kg</AppText>
-                        <AppText>{user.height} cm</AppText>
-                    </View>
+                <View style={styles.containerDetails}>
+                    <PhysicalConditionBox value={user.weight} suffix='kg' text='Weight' />
+                    <View style={styles.spacer}></View>
+                    <PhysicalConditionBox value={user.height} suffix='cm' text='Height' />
                 </View>
             </View>
         </AppCard>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         width: '100%',
-        gap: gapBetweenSection
+        gap: gapBetweenElements
     },
     containerUserWrapper: {
         flexDirection: 'row',
@@ -57,16 +60,22 @@ const styles = StyleSheet.create({
     },
     containerUser: {
         flexDirection: 'column',
-        gap: 4,
-    },
-    containerDetailsWrapper: {
-        flexDirection: 'column',
-        gap: 4
+        gap: 2,
     },
     containerDetails: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        gap: gapBetweenSection
+        gap: gapBetweenElements,
+        width: '100%',
     },
+    containerUserDetails: {
+        flexDirection: 'row',
+        gap: gapBetweenElements
+    },
+    spacer: {
+        height: '70%',
+        borderColor: grayMutedBackground,
+        borderWidth: .5
+    }
 });
