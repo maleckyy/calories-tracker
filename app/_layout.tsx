@@ -1,12 +1,12 @@
-import AppLoading from "@/components/shared/AppLoading";
-import { clearOldHydration } from "@/db/actions/hydration/clearOldHydration";
-import { clearOldMeals } from "@/db/actions/meals/clearOldMeals";
-import { toastConfig } from "@/utils/toasts/toastConfig";
-import { useFonts } from 'expo-font';
-import { Stack } from "expo-router";
-import { useEffect } from "react";
-import Toast from 'react-native-toast-message';
-import { initDB } from "../db/database";
+import AppLoading from "@/components/shared/AppLoading"
+import { clearOldHydration } from "@/db/actions/hydration/clearOldHydration"
+import { clearOldMeals } from "@/db/actions/meals/clearOldMeals"
+import { toastConfig } from "@/utils/toasts/toastConfig"
+import { useFonts } from 'expo-font'
+import { Stack } from "expo-router"
+import { useEffect } from "react"
+import Toast from "react-native-toast-message"
+import { initDB } from "../db/database"
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -22,6 +22,7 @@ export default function RootLayout() {
   }, [])
 
   if (!fontsLoaded) return <AppLoading />
+
   return (
     <>
       <Stack>
